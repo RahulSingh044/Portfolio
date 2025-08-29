@@ -7,6 +7,7 @@ import { SquareArrowOutUpRight, Plus } from "lucide-react";
 import Link from "next/link";
 import TestimonialForm from "./TestimonialForm";
 import { useDispatch } from "react-redux";
+import { usePathname } from "next/navigation";
 import { setCursorVariants } from "../src/store/cursorSlice";
 import { FileDown } from "lucide-react";
 import { FileUser } from "lucide-react";
@@ -22,29 +23,45 @@ import {
 
 function Nav() {
   const dispatch = useDispatch();
+  const pathname = usePathname();
+
   const [isVisible, setIsVisible] = React.useState({
-    about: true,
+    about: false,
     projects: false,
     skills: false,
     testimonials: false,
     contact: false,
   });
 
+  React.useEffect(() => {
+    const sectionMap = {
+      "/": "about",
+      "/projects": "projects",
+      "/skills": "skills",
+      "/testimonials": "testimonials",
+      "/contact": "contact",
+    };
+
+    const currentSection = sectionMap[pathname] || "about";
+
+    setIsVisible({
+      about: false,
+      projects: false,
+      skills: false,
+      testimonials: false,
+      contact: false,
+      [currentSection]: true,
+    });
+  }, [pathname]);
 
   const toggleVisibility = (section) => {
-    setIsVisible((prevState) => {
-      // Make a copy of the previous state
-      const newState = { ...prevState };
-
-      // Set all sections to false first
-      Object.keys(newState).forEach((key) => {
-        newState[key] = false;
-      });
-
-      // Toggle the clicked section
-      newState[section] = !prevState[section];
-
-      return newState;
+    setIsVisible({
+      about: false,
+      projects: false,
+      skills: false,
+      testimonials: false,
+      contact: false,
+      [section]: true,
     });
   };
 
@@ -64,12 +81,7 @@ function Nav() {
     dispatch(setCursorVariants('ImgHover'));
   }
 
-  React.useEffect(() => {
-    const currentUrl = window.location.href;
-    const Base = "http://localhost:3000/";
-    const Url = currentUrl.replace(Base, "");
-    toggleVisibility(Url);
-  }, []);
+  
 
   return (
     <div className="min-w-screen h-80">
