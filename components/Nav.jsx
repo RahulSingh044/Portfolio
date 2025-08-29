@@ -113,7 +113,7 @@ function Nav() {
                 </Link>
               </div> */}
 
-              <Link href="/Rahul_Resume.pdf" target="_blank" download>
+              <Link href="/Resume_Rahul.pdf" target="_blank" download>
                 <button onClick={() => window.open("https://drive.google.com/file/d/1Y2OEmdY39hiJSVgwBWlW7brNmjHKm9sV/view?usp=sharing")} onMouseEnter={BtnClick} onMouseLeave={textLeave} className="md:w-10 md:h-10 w-8 h-8 flex justify-center items-center rounded-full border-2 hover:bg-green-800 hover:text-white transition-all duration-300 md:hover:after:content-['Resume'] md:hover:w-28">
                   <FileUser className="text-gray-500 hover:text-white w-5" />
                 </button>
