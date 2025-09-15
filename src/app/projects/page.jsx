@@ -19,6 +19,7 @@ import { Github, MoveRight } from "lucide-react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { setCursorVariants } from "../../store/cursorSlice";
+import ProjectSkeleton from "../../../components/projectsSkeletonLoading"
 
 function projects() {
   const dispatch = useDispatch();
@@ -65,17 +66,13 @@ function projects() {
   }
 
   if (loading) {
-    return (
-      <div className="flex justify-center items-center h-96">
-        <p className="text-2xl font-bold">Loading...</p>
-      </div>
-    )
+    return <ProjectSkeleton />
   }
 
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 lg:gap-4 md:gap-6 lg:px-20 md:px-10 px-4 gap-y-4 mb-4 md:mt-10 mt-20">
-      {projects &&
+      {
         projects.map((pro, index) => (
           <HoverCard className='rounded-xl md:w-64 w-48'>
             <HoverCardTrigger>

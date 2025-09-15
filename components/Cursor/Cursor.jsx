@@ -1,5 +1,5 @@
 'use client';
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import './cursor.css'
 import { motion } from 'framer-motion'
 import { useSelector } from 'react-redux';
@@ -40,28 +40,35 @@ function Cursor() {
       height: 40,
       x: cursor.x - 20,
       y: cursor.y - 20,
-      background: 'white',
-      mixBlendMode: 'difference',
+      backgroundColor: 'white',
+      mixBlendMode: 'difference', // key line
     },
-    BtnClick:{
-      width:60,
-      height:60,
+    BtnClick: {
+      width: 60,
+      height: 60,
       x: cursor.x - 30,
       y: cursor.y - 30,
       backgroundColor: 'green',
       mixBlendMode: 'overlay',
     },
-    ImgHover:{
-      width:60,
-      height:60,
+    ImgHover: {
+      width: 60,
+      height: 60,
       x: cursor.x - 30,
       y: cursor.y - 30,
-      backgroundColor: 'transparent'
+      backgroundColor: 'transparent',
     }
-  }
+  };
+
 
   return (
-    <motion.div className='cursor' variants={variants} animate={cursorVariants}>
+    <motion.div className='cursor' variants={variants} animate={cursorVariants}
+      transition={{
+        type: "tween",
+        ease: 'easeOut',
+        duration: 0.1
+      }}
+    >
     </motion.div>
   )
 }
