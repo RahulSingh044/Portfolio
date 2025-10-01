@@ -9,7 +9,7 @@ import { setCursorVariants } from "../../store/cursorSlice";
 
 function contact() {
   const dispatch = useDispatch();
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const { register, handleSubmit, formState: { errors }, reset } = useForm();
 
   const onSubmit = async (value) => {
     try {
@@ -21,10 +21,10 @@ function contact() {
           message: value.message
         }
       }
-      const res = await axios.post(`${process.env.NEXT_PUBLIC_STRAPI_URL}/contacts`, values)
-      console.log(res)
+      const res = await axios.post(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/contacts`, values)
       if (res.status === 201) {
         toast.success("Message sent successfully")
+        reset();
       }
     } catch (error) {
       // Log the full error details to help debug the issue

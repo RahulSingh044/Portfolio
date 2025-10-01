@@ -4,6 +4,7 @@ import Nav from "../../components/Nav";
 import { Toaster } from "react-hot-toast";
 import Cursor from "../../components/Cursor/Cursor";
 import SliceProvider from "./SliceProvider";
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],

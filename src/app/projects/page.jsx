@@ -26,19 +26,33 @@ function projects() {
   const [projects, setProjects] = React.useState([]);
   const [loading, setLoading] = React.useState(false);
 
-  const proj = async () => {
-    try {
-      setLoading(true);
-      const res = await axios.get(
-        `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/projects?populate=*`
-      );
-      console.log(res.data.data)
-      setProjects(res.data.data);
-      setLoading(false);
-    } catch (error) {
-      console.log(error.message);
+const proj = async () => {
+  try {
+    setLoading(true);
+
+    const cachedProject = localStorage.getItem("Projects");
+
+    if (cachedProject) {
+      setProjects(JSON.parse(cachedProject));
     }
-  };
+
+    const res = await axios.get(
+      `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/projects?populate=*`
+    );
+
+    console.log(res.data.data);
+
+    setProjects(res.data.data);
+
+    localStorage.setItem("Projects", JSON.stringify(res.data.data));
+
+    setLoading(false);
+  } catch (error) {
+    console.log(error.message);
+    setLoading(false);
+  }
+};
+
 
   const badgecreation = (tech) => {
     const techs = tech.split(",");
@@ -71,14 +85,14 @@ function projects() {
 
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 lg:gap-4 md:gap-6 lg:px-20 md:px-10 px-4 gap-y-4 mb-4 md:mt-10 mt-20">
+    <div className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 lg:gap-4 md:gap-6 lg:px-20 md:px-10 px-4 gap-y-4 mb-4 md:mt-10 mt-20 h-full">
       {
         projects.map((pro, index) => (
-          <HoverCard className='rounded-xl md:w-64 w-48'>
+          <HoverCard className='rounded-xl'>
             <HoverCardTrigger>
               <Card key={index} className="hover:-translate-y-2 transition-all duration-200">
-                <div className="w-full">
-                  <img className="rounded-xl" src={pro.image.url} width={500} height={500} alt={pro.Title} />
+                <div className="w-full h-56">
+                  <img className="rounded-xl object-contain w-full h-56" src={pro.image.url} width={500} height={500} alt={pro.Title} />
                 </div>
                 <CardHeader>
                   <div className="flex justify-between">

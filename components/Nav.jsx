@@ -9,17 +9,8 @@ import TestimonialForm from "./TestimonialForm";
 import { useDispatch } from "react-redux";
 import { usePathname } from "next/navigation";
 import { setCursorVariants } from "../src/store/cursorSlice";
-import { FileDown } from "lucide-react";
 import { FileUser } from "lucide-react";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogFooter,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
+
 
 function Nav() {
   const dispatch = useDispatch();
@@ -100,7 +91,7 @@ function Nav() {
         </div>
         {/* Bio */}
         <div className="w-full md:py-8 py-4 flex flex-col gap-3 md:border-b-0 border-b-2 border-gray-200">
-          <h1 onMouseEnter={textEnter} onMouseLeave={textLeave} className="md:text-4xl lg:text-5xl text-2xl font-bold md:tracking-wider">
+          <h1 onMouseEnter={textEnter} onMouseLeave={textLeave} className="md:text-4xl lg:text-5xl text-2xl font-serif font-bold md:tracking-wider">
             Rahul Singh Chouhan
           </h1>
           <p onMouseEnter={textEnter} onMouseLeave={textLeave} className="text-gray-400 md:text-lg lg:text-xl">MERN Stack Developer | Full-Stack Web Development | React | Node.js | MongoDB</p>
